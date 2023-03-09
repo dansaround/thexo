@@ -5,7 +5,7 @@ import Oicon from "../icons/Oicon";
 import Xicon from "../icons/Xicon";
 import BoardCard from "./BoardCard";
 
-const Board = () => {
+const Board = ({ socket }) => {
   const { showModal, setModalMode } = useContext(ModalContext);
 
   const handleRestart = () => {
@@ -13,8 +13,22 @@ const Board = () => {
     setModalMode("start");
   };
 
-  const { squares, winner, winnerLine, xnext, ties, activeUser, playMode } =
-    useContext(GameContext);
+  const {
+    squares,
+    winner,
+    winnerLine,
+    xnext,
+    ties,
+    activeUser,
+    playMode,
+    iMoved,
+    myTurn,
+  } = useContext(GameContext);
+
+  const handleMove = (ix) => {
+    if (iMoved) return;
+    socket.emit("move", { ix, turn: myTurn });
+  };
 
   const checkUser = (user) => {
     if (playMode === "cpu") {
@@ -67,6 +81,7 @@ const Board = () => {
             key={ix}
             user={sq}
             index={ix}
+            handleMove={handleMove}
             active={winner && winnerLine && winnerLine.includes(ix)}
           />
         ))}

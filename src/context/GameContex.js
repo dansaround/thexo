@@ -10,9 +10,12 @@ const GameState = (props) => {
   const [activeUser, setActiveUser] = useState("x"); // x || o
   const [squares, setSquares] = useState(new Array(9).fill(""));
   const [xnext, setXnext] = useState(false);
+  const [turn, setTurn] = useState("x");
+  const [myTurn, setMyTurn] = useState("");
   const [winner, setWinner] = useState(null);
   const [winnerLine, setWinnerLine] = useState(null);
   const [ties, setTies] = useState({ x: 0, o: 0 });
+  const [iMoved, setIMoved] = useState(false);
 
   const { showModal, hideModal, setModalMode } = useContext(ModalContext);
 
@@ -39,6 +42,7 @@ const GameState = (props) => {
     if (playMode === "cpu" && currentUser !== activeUser) {
       return;
     }
+
     let ns = [...squares];
     ns[ix] = !xnext ? "x" : "o";
     setSquares(ns);
@@ -100,20 +104,33 @@ const GameState = (props) => {
     <GameContext.Provider
       value={{
         squares,
+        setSquares,
         winner,
+        setWinner,
         winnerLine,
+        setWinnerLine,
         xnext,
+        setXnext,
+        turn,
+        setTurn,
         ties,
         screen,
+        setScreen,
         activeUser,
         playMode,
         handleStart,
         setActiveUser,
         setPlayMode,
         setTies,
+        showModal,
+        setModalMode,
         handleSquareClick,
         handleReset,
         handleNextRound,
+        setIMoved,
+        iMoved,
+        setMyTurn,
+        myTurn,
       }}
     >
       {props.children}

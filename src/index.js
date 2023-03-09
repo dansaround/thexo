@@ -8,12 +8,12 @@ import { GameState } from "./context/GameContex";
 import { ModalState } from "./context/ModalContext";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ModalState>
-      <GameState>
-        <App />
-      </GameState>
-    </ModalState>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <ModalState>
+    <GameState>
+      <App />
+    </GameState>
+  </ModalState>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
