@@ -6,14 +6,17 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 import { GameState } from "./context/GameContex";
 import { ModalState } from "./context/ModalContext";
+import { GameMainContext } from "./context/MainContext";
 
 ReactDOM.render(
   // <React.StrictMode>
-  <ModalState>
-    <GameState>
-      <RouterProvider router={router} />
-    </GameState>
-  </ModalState>,
+  <GameMainContext>
+    <ModalState>
+      <GameState>
+        <RouterProvider router={router} />
+      </GameState>
+    </ModalState>
+  </GameMainContext>,
   // </React.StrictMode>,
   document.getElementById("root")
 );

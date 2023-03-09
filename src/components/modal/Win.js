@@ -5,6 +5,7 @@ import Xicon from "../icons/Xicon";
 
 const Win = () => {
   const { winner, handleNextRound, handleReset } = useContext(GameContext);
+
   return (
     <div className="score">
       {winner && winner !== "no" ? (

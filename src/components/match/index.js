@@ -41,7 +41,7 @@ function Match() {
                     </p>
                   </div>
                   <div className="btn__area">
-                    <button className="btn btn-yellow">Join a Room</button>
+                    <button className="btn btn-yellow">Find match</button>
                   </div>
                 </div>
               );
