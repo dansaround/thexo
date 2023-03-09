@@ -1,0 +1,78 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.login__container {
+  max-height: 400px;
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 450px;
+  width: 100%;
+  margin-inline: auto;
+
+  padding: 2rem 1rem;
+  background-color: var(--color-bg-light);
+  border-radius: 25px;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.google-login-btn {
+  background-color: var(--color-gray);
+  border: none;
+  font-size: 1.125rem;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 var(--shadow-y) 0 var(--color-gray-dark);
+  margin-bottom: 8px;
+  display: inline-block;
+  color: var(--color-bg-light);
+}
+.google-login-btn:hover {
+  --shadow-y: 8px;
+  transform: translateY(-2px);
+}
+
+.google-login-btn:active {
+  transform: translateY(2px);
+  --shadow-y: 4px;
+}
+
+/* Aplicamos el gradiente de color de texto */
+
+.login__container h1 {
+  font-size: 3.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  letter-spacing: 5px;
+  font-weight: bolder;
+  margin-bottom: 20px;
+  background-image: linear-gradient(
+    to right,
+    var(--color-blue),
+    var(--color-yellow)
+  );
+  background-clip: text;
+  -webkit-background-clip: text; /* para Safari */
+  color: transparent;
+}
+
+.login__container span {
+  margin-top: 20px;
+  font-size: small;
+}
+
+.icons {
+  transform: scale(1.5);
+
+  margin-bottom: 25px;
+}
