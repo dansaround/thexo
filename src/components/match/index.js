@@ -1,5 +1,7 @@
 import React from "react";
 import "./match.css";
+import Xicon from "../icons/Xicon";
+import Oicon from "../icons/Oicon";
 
 function Match() {
   const data = [
@@ -27,8 +29,12 @@ function Match() {
 
               return (
                 <div className="matchmaking__user__info">
+                  <div className="matchmaking__icons">
+                    <Xicon />
+                    <Oicon />
+                  </div>
                   <h2>Username: {usuario}</h2>
-                  <p>Nivel Actual {nivelActual}</p>
+                  <p className="level__current">Nivel Actual {nivelActual}</p>
                   <div className="level__bar">
                     <div
                       className="level__bar__completed"
