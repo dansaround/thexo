@@ -1,34 +1,19 @@
-import React, { useContext } from "react";
-import "./login.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import "./login.css";
+
 import Xicon from "../icons/Xicon";
 import Oicon from "../icons/Oicon";
-import { MainContext } from "../../context/MainContext";
-
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  getAdditionalUserInfo,
-} from "firebase/auth";
+import { useAuth } from "../../hooks/useAuth";
+import { useSessionValidation } from "../../hooks/useSessionValidation";
 
 function Login() {
-  const auth = getAuth();
-  const { testUsers } = useContext(MainContext);
-
-  const handleGoogleSignup = async () => {
-    const provider = new GoogleAuthProvider();
-
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      const additionalInfo = getAdditionalUserInfo(result);
-      console.log("USER INFO", user, additionalInfo);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const { handleGoogleSignup, isLoading } = useAuth();
+  const navigate = useNavigate();
+  useSessionValidation({ userIsLogged: () => navigate("/match") });
 
   return (
     <div className="login">
@@ -38,10 +23,18 @@ function Login() {
       </div>
       <div className="login__container">
         <h1>THEXO</h1>
-        <button className="google-login-btn" onClick={handleGoogleSignup}>
-          <FontAwesomeIcon icon={faGoogle} /> Login with Google
-        </button>
-        <span onClick={testUsers}>Login to play</span>
+        {!isLoading ? (
+          <button className="google-login-btn" onClick={handleGoogleSignup}>
+            <FontAwesomeIcon icon={faGoogle} /> Login with Google
+          </button>
+        ) : (
+          <button
+            className="google-login-btn"
+            style={{ backgroundColor: "var(--color-gray)" }}
+          >
+            <FontAwesomeIcon icon={faGoogle} /> Loggin in ...
+          </button>
+        )}
       </div>
     </div>
   );

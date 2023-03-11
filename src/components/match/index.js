@@ -4,10 +4,15 @@ import "./match.css";
 import Xicon from "../icons/Xicon";
 import Oicon from "../icons/Oicon";
 import { MainContext } from "../../context/MainContext";
+import { useSessionValidation } from "../../hooks/useSessionValidation";
+import { useNavigate } from "react-router-dom";
 
 function Match() {
-  const [isSearchingMatch, setIsSearchingMatch] = useState(false);
+  const navigate = useNavigate();
+  useSessionValidation({ userIsNotLogged: () => navigate("/login") });
   const { putPlayerInQueue, handleReset } = useContext(MainContext);
+
+  const [isSearchingMatch, setIsSearchingMatch] = useState(false);
 
   const data = [
     {
