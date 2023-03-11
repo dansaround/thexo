@@ -9,21 +9,21 @@ const lines = [
   [2, 4, 6],
 ];
 
-export function calcWinner(squares) {
+export function calcWinner(board) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return { winner: squares[a], line: lines[i] };
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return { winner: board[a], line: lines[i] };
     }
   }
   return null;
 }
 
-export default function calcBestMove(squares, player) {
+export default function calcBestMove(board, player) {
   const getArrDuplicatedCount = (arr) => {
     let count = 0;
     arr.forEach((i) => {
-      if (squares[i] === player) {
+      if (board[i] === player) {
         count += 1;
       }
     });
@@ -38,7 +38,7 @@ export default function calcBestMove(squares, player) {
 
   for (let i = 0; i < sortedLines.length; i++) {
     let val = sortedLines[i].find((el) => {
-      if (squares[el] === "") {
+      if (board[el] === "") {
         return el + "";
       }
       return null;

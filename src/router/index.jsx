@@ -3,18 +3,35 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Login from "../components/login";
 import Match from "../components/match";
+import { GameMainContext } from "../context/MainContext";
+
+const ContextWrapper = ({ children }) => {
+  return <GameMainContext>{children}</GameMainContext>;
+};
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <ContextWrapper>
+        <App />
+      </ContextWrapper>
+    ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <ContextWrapper>
+        <Login />
+      </ContextWrapper>
+    ),
   },
   {
     path: "/match",
-    element: <Match />,
+    element: (
+      <ContextWrapper>
+        <Match />
+      </ContextWrapper>
+    ),
   },
 ]);

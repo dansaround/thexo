@@ -2,20 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import Board from "./components/board";
 import Modal from "./components/modal";
 import Start from "./components/start";
-import { GameContext } from "./context/GameContex";
 
-import io from "socket.io-client";
+import { MainContext } from "./context/MainContext";
 
 function App() {
+  const { screen } = useContext(MainContext);
+
   return (
     <div className="App">
       <div className="container">
-        {/* {screen === "start" ? (
-            <Start socket={socket} handleJoinTheRoom={handleJoinTheRoom} />
-          ) : (
-            <Board socket={socket} />
-          )} */}
-        <Start />
+        {screen === "start" ? <Start /> : <Board />}
       </div>
       <Modal />
     </div>

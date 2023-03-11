@@ -9,6 +9,7 @@ export const gameOverSocket = (socket, stateData) => {
       return;
     }
 
+    console.log("GAME OVER ", moveResult);
     setWinner(moveResult.winner);
     setWinnerLine(moveResult.line);
     showModal();

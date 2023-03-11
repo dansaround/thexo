@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
-import { GameContext } from "../../context/GameContex";
+import { useNavigate } from "react-router-dom";
+import { MainContext } from "../../context/MainContext";
 import Oicon from "../icons/Oicon";
 import Xicon from "../icons/Xicon";
 
 const Win = () => {
-  const { winner, handleNextRound, handleReset } = useContext(GameContext);
+  const navigate = useNavigate();
+  const { winner } = useContext(MainContext);
+
+  const handlePlayAgain = () => {
+    navigate("/match");
+  };
 
   return (
     <div className="score">
@@ -25,16 +31,8 @@ const Win = () => {
         <h3 className="score__title text-yellow">No Winner !</h3>
       )}
       <div className="score__btns">
-        <button className="btn btn-sm" onClick={handleReset}>
-          Quit
-        </button>
-        <button
-          className={`btn   btn-sm ${
-            winner === "x" ? "btn-yellow" : "btn-blue"
-          }`}
-          onClick={handleNextRound}
-        >
-          Next Round
+        <button onClick={handlePlayAgain} className={`btn   btn-sm `}>
+          Play again
         </button>
       </div>
     </div>
