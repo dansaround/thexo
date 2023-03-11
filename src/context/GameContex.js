@@ -8,7 +8,7 @@ const GameState = (props) => {
   const [screen, setScreen] = useState("start"); // start || game
   const [playMode, setPlayMode] = useState("user"); // user || cpu
   const [activeUser, setActiveUser] = useState("x"); // x || o
-  const [squares, setSquares] = useState(new Array(9).fill(""));
+  const [board, setBoard] = useState(new Array(9).fill(""));
   const [xnext, setXnext] = useState(false);
   const [turn, setTurn] = useState("x");
   const [myTurn, setMyTurn] = useState("");
@@ -23,7 +23,7 @@ const GameState = (props) => {
     //check if cpu turn
     let currentUser = xnext ? "o" : "x";
     if (playMode === "cpu" && currentUser !== activeUser && !winner) {
-      cpuNextMove(squares);
+      cpuNextMove(board);
     }
     checkNoWinner();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,7 +35,7 @@ const GameState = (props) => {
   };
 
   const handleSquareClick = (ix) => {
-    if (squares[ix] || winner) {
+    if (board[ix] || winner) {
       return;
     }
     let currentUser = xnext ? "o" : "x";
@@ -43,9 +43,9 @@ const GameState = (props) => {
       return;
     }
 
-    let ns = [...squares];
+    let ns = [...board];
     ns[ix] = !xnext ? "x" : "o";
-    setSquares(ns);
+    setBoard(ns);
     setXnext(!xnext);
     checkWinner(ns);
   };
@@ -65,15 +65,15 @@ const GameState = (props) => {
 
   const cpuNextMove = (sqrs) => {
     let bestmove = calcBestMove(sqrs, activeUser === "x" ? "o" : "x");
-    let ns = [...squares];
+    let ns = [...board];
     ns[bestmove] = !xnext ? "x" : "o";
-    setSquares(ns);
+    setBoard(ns);
     setXnext(!xnext);
     checkWinner(ns);
   };
 
   const handleReset = () => {
-    setSquares(new Array(9).fill(""));
+    setBoard(new Array(9).fill(""));
     setXnext(false);
     setWinner(null);
     setWinnerLine(null);
@@ -84,7 +84,7 @@ const GameState = (props) => {
   };
 
   const handleNextRound = () => {
-    setSquares(new Array(9).fill(""));
+    setBoard(new Array(9).fill(""));
     setXnext(winner === "x");
     setWinner(null);
     setWinnerLine(null);
@@ -92,7 +92,7 @@ const GameState = (props) => {
   };
 
   const checkNoWinner = () => {
-    const moves = squares.filter((sq) => sq === "");
+    const moves = board.filter((sq) => sq === "");
     if (moves.length === 0) {
       setWinner("no");
       showModal();
@@ -103,8 +103,8 @@ const GameState = (props) => {
   return (
     <GameContext.Provider
       value={{
-        squares,
-        setSquares,
+        board,
+        setBoard,
         winner,
         setWinner,
         winnerLine,

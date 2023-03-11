@@ -7,13 +7,13 @@ const Restart = () => {
   const { handleReset } = useContext(GameContext);
   return (
     <div className="restart">
-      <h3 className="restart__title">Restart Game?</h3>
+      <h3 className="restart__title">Exit Game?</h3>
       <div className="restart__btns">
         <button className="btn btn-sm" onClick={hideModal}>
-          no, cancal
+          yes, exit
         </button>
         <button className="btn btn-yellow btn-sm" onClick={handleReset}>
-          yes, restart
+          cancel
         </button>
       </div>
     </div>

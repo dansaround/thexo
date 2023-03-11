@@ -54,6 +54,16 @@ body {
   text-align: center;
 }
 
+.card-blue:hover {
+  background-color: rgba(48, 196, 190, 0.45);
+  box-shadow: 0 8px 0 var(--color-blue-dark);
+}
+
+.card-yellow:hover {
+  background-color: rgba(242, 178, 56, 0.6);
+  box-shadow: 0 8px 0 var(--color-yellow-dark);
+}
+
 .bg-light {
   background-color: var(--color-gray);
   color: var(--color-bg-dark);

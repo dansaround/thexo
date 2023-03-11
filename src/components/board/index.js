@@ -1,43 +1,23 @@
 import React, { useContext } from "react";
-import { GameContext } from "../../context/GameContex";
+import { MainContext } from "../../context/MainContext";
 import { ModalContext } from "../../context/ModalContext";
 import Oicon from "../icons/Oicon";
 import Xicon from "../icons/Xicon";
 import BoardCard from "./BoardCard";
 
-const Board = ({ socket }) => {
+const Board = () => {
   const { showModal, setModalMode } = useContext(ModalContext);
+  const { winnerLine, board, winner, handlePlayerMove, currentTurn, myTurn } =
+    useContext(MainContext);
 
   const handleRestart = () => {
     showModal();
     setModalMode("start");
   };
 
-  const {
-    squares,
-    winner,
-    winnerLine,
-    xnext,
-    ties,
-    activeUser,
-    playMode,
-    iMoved,
-    myTurn,
-  } = useContext(GameContext);
-
-  const handleMove = (ix) => {
-    if (iMoved) return;
-    socket.emit("move", { ix, turn: myTurn });
-  };
-
-  const checkUser = (user) => {
-    if (playMode === "cpu") {
-      if (user === activeUser) {
-        return "(you)";
-      } else {
-        return "(cpu)";
-      }
-    }
+  const handleMove = (index) => {
+    if (currentTurn !== myTurn) return;
+    handlePlayerMove(index);
   };
 
   return (
@@ -48,12 +28,12 @@ const Board = ({ socket }) => {
           <Oicon />
         </div>
         <div className="board__turn">
-          {!xnext ? (
+          {currentTurn === "x" ? (
             <Xicon color="light" size="sm" />
           ) : (
             <Oicon color="light" size="sm" />
           )}
-          turn
+          {myTurn === currentTurn ? "Your turn" : "turn"}
         </div>
         <div>
           <button className="btn btn-sm board__restart" onClick={handleRestart}>
@@ -76,17 +56,18 @@ const Board = ({ socket }) => {
       </div>
       {/* <BoardCard user="x" active={true} /> */}
       <div className="board__body">
-        {squares.map((sq, ix) => (
+        {board.map((sq, ix) => (
           <BoardCard
             key={ix}
             user={sq}
             index={ix}
+            myTurn={myTurn}
             handleMove={handleMove}
             active={winner && winnerLine && winnerLine.includes(ix)}
           />
         ))}
       </div>
-      <div className="board__footer">
+      {/* <div className="board__footer">
         <div className="card bg-blue">
           <p className="text-light">x {checkUser("x")}</p>
           <strong className="text-2xl"> {ties.x} </strong>
@@ -99,7 +80,7 @@ const Board = ({ socket }) => {
           <p className="text-light">o {checkUser("o")}</p>
           <strong className="text-2xl"> {ties.o}</strong>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

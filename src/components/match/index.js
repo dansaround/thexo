@@ -1,13 +1,19 @@
 import React from "react";
 import "animate.css";
 
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect, useState } from "react";
 import "./match.css";
 
 import Oicon from "../icons/Oicon";
 import Xicon from "../icons/Xicon";
 import ProfilePic from "../../assets/profile_pic.png";
+import { MainContext } from "../../context/MainContext";
 
 function Match() {
+  const [isSearchingMatch, setIsSearchingMatch] = useState(false);
+  const { putPlayerInQueue, handleReset } = useContext(MainContext);
+
   const data = [
     {
       usuario: "UserName",
@@ -16,6 +22,15 @@ function Match() {
       experienciaSiguienteNivel: 5000,
     },
   ];
+
+  useEffect(() => {
+    handleReset();
+  }, []);
+
+  const handlePutPlayerInQueue = () => {
+    setIsSearchingMatch(true);
+    putPlayerInQueue();
+  };
 
   return (
     <div className="match">
@@ -52,6 +67,22 @@ function Match() {
                       {experienciaActual} / {experienciaSiguienteNivel}
                     </p>
                   </div>
+                  {!isSearchingMatch ? (
+                    <div className="btn__area" onClick={handlePutPlayerInQueue}>
+                      <button className="btn btn-yellow">Find match</button>
+                    </div>
+                  ) : (
+                    <h2
+                      style={{
+                        marginTop: 20,
+                        width: "100%",
+                        textAlign: "center",
+                      }}
+                    >
+                      {" "}
+                      Buscando rival{" "}
+                    </h2>
+                  )}
                 </div>
               );
             }
