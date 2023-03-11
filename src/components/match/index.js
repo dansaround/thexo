@@ -33,11 +33,11 @@ function Match() {
 
   return (
     <div className="match">
-      <div className="matchmaking__icons animate__animated animate__fadeInUp">
+      <div className="matchmaking__icons animate__animated animate__fadeInUp animate__fast">
         <Xicon />
         <Oicon />
       </div>
-      <div className="match__container animate__animated animate__fadeInUp ">
+      <div className="match__container animate__animated animate__fadeInUp animate__fast ">
         <div>
           {data.map(
             ({
@@ -50,7 +50,7 @@ function Match() {
                 (experienciaActual / experienciaSiguienteNivel) * 100;
 
               return (
-                <div className="matchmaking__user__info animate__animated animate__fadeInUp animate__delay-1s">
+                <div className="matchmaking__user__info animate__animated animate__fadeIn animate__delay-500ms">
                   <img src={ProfilePic} />
                   <h2>{usuario}</h2>
 
@@ -70,7 +70,7 @@ function Match() {
               );
             }
           )}
-          <p className="animate__animated animate__fadeInUp animate__delay-1s">
+          <p className="animate__animated animate__fadeIn animate__delay-1s">
             Join a Room to Play
           </p>
         </div>
@@ -78,7 +78,7 @@ function Match() {
 
       {!isSearchingMatch ? (
         <div
-          className="btn__area btn__area animate__animated animate__fadeInUp animate__delay-2s animate__faster"
+          className="btn__area btn__area animate__animated animate__fadeInUp animate__delay-1s animate__faster"
           onClick={handlePutPlayerInQueue}
         >
           <button className="btn-join btn btn-yellow ">Find match</button>

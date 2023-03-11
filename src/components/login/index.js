@@ -1,17 +1,19 @@
 import React, { useContext } from "react";
-import "./login.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import Xicon from "../icons/Xicon";
-import Oicon from "../icons/Oicon";
-import { MainContext } from "../../context/MainContext";
-
+import "animate.css";
 import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   getAdditionalUserInfo,
 } from "firebase/auth";
+
+import "./login.css";
+
+import { MainContext } from "../../context/MainContext";
+import Xicon from "../icons/Xicon";
+import Oicon from "../icons/Oicon";
 
 function Login() {
   const auth = getAuth();
@@ -32,12 +34,12 @@ function Login() {
 
   return (
     <div className="login">
-      <div className="icons">
+      <div className="icons animate__animated animate__fadeInUp">
         <Xicon />
         <Oicon />
       </div>
-      <div className="login__container">
-        <h1>THEXO</h1>
+      <div className="login__container animate__animated animate__fadeInUp">
+        <h1>THEXO </h1>
         <button className="google-login-btn" onClick={handleGoogleSignup}>
           <FontAwesomeIcon icon={faGoogle} /> Login with Google
         </button>
