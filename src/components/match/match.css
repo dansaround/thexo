@@ -28,7 +28,7 @@
   margin: 50px;
   max-width: 450px;
   width: 100%;
-  --animate-delay: 0.9s;
+  --animate-delay: 0.5s;
 }
 
 .btn-join {

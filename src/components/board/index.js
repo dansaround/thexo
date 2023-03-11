@@ -4,6 +4,7 @@ import { ModalContext } from "../../context/ModalContext";
 import Oicon from "../icons/Oicon";
 import Xicon from "../icons/Xicon";
 import BoardCard from "./BoardCard";
+import "animate.css";
 
 const Board = () => {
   const { showModal, setModalMode } = useContext(ModalContext);
@@ -21,7 +22,7 @@ const Board = () => {
   };
 
   return (
-    <div className="board">
+    <div className="board animate__animated animate__fadeIn slow ">
       <div className="board__header">
         <div>
           <Xicon />

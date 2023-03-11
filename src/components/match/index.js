@@ -81,7 +81,7 @@ function Match() {
           className="btn__area btn__area animate__animated animate__fadeInUp animate__delay-1s animate__faster"
           onClick={handlePutPlayerInQueue}
         >
-          <button className="btn-join btn btn-yellow ">Find match</button>
+          <button className="btn btn-yellow btn-join">Find match</button>
         </div>
       ) : (
         <h2
