@@ -15,6 +15,9 @@
   --color-blue-dark: #128c89;
 
   --shadow-y: 6px;
+
+  --animate-duration: 800ms;
+  --animate-delay: 0.9s;
 }
 
 html {
