@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Login from "../components/login";
 import Match from "../components/match";
+import SelectUser from "../components/SelectUser";
 import { GameMainContext } from "../context/MainContext";
 
 const ContextWrapper = ({ children }) => {
@@ -31,6 +32,14 @@ export const router = createBrowserRouter([
     element: (
       <ContextWrapper>
         <Match />
+      </ContextWrapper>
+    ),
+  },
+  {
+    path: "/selectUser",
+    element: (
+      <ContextWrapper>
+        <SelectUser />
       </ContextWrapper>
     ),
   },
