@@ -1,4 +1,3 @@
-import React from "react";
 import "animate.css";
 
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -67,22 +66,6 @@ function Match() {
                       {experienciaActual} / {experienciaSiguienteNivel}
                     </p>
                   </div>
-                  {!isSearchingMatch ? (
-                    <div className="btn__area" onClick={handlePutPlayerInQueue}>
-                      <button className="btn btn-yellow">Find match</button>
-                    </div>
-                  ) : (
-                    <h2
-                      style={{
-                        marginTop: 20,
-                        width: "100%",
-                        textAlign: "center",
-                      }}
-                    >
-                      {" "}
-                      Buscando rival{" "}
-                    </h2>
-                  )}
                 </div>
               );
             }
@@ -92,9 +75,26 @@ function Match() {
           </p>
         </div>
       </div>
-      <div className="btn__area animate__animated animate__fadeInUp animate__delay-2s animate__faster">
-        <button className="btn-join btn btn-yellow ">Join a Room</button>
-      </div>
+
+      {!isSearchingMatch ? (
+        <div
+          className="btn__area btn__area animate__animated animate__fadeInUp animate__delay-2s animate__faster"
+          onClick={handlePutPlayerInQueue}
+        >
+          <button className="btn-join btn btn-yellow ">Find match</button>
+        </div>
+      ) : (
+        <h2
+          style={{
+            marginTop: 40,
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          {" "}
+          Buscando rival{" "}
+        </h2>
+      )}
     </div>
   );
 }
