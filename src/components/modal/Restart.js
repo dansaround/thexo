@@ -1,18 +1,23 @@
 import React, { useContext } from "react";
-import { GameContext } from "../../context/GameContex";
 import { ModalContext } from "../../context/ModalContext";
+import { useNavigate } from "react-router-dom";
 
 const Restart = () => {
+  const navigate = useNavigate();
   const { hideModal } = useContext(ModalContext);
-  const { handleReset } = useContext(GameContext);
+
+  const handleExitGame = () => {
+    navigate("/match");
+  };
+
   return (
     <div className="restart">
       <h3 className="restart__title">Exit Game?</h3>
       <div className="restart__btns">
-        <button className="btn btn-sm" onClick={hideModal}>
+        <button className="btn btn-sm" onClick={handleExitGame}>
           yes, exit
         </button>
-        <button className="btn btn-yellow btn-sm" onClick={handleReset}>
+        <button className="btn btn-yellow btn-sm" onClick={hideModal}>
           cancel
         </button>
       </div>

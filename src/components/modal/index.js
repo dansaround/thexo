@@ -8,7 +8,7 @@ const Modal = () => {
 
   return (
     <div className={`modal ${!show && "closed"}`}>
-      <div className="modal__content">
+      <div className="modal__content slide__right">
         <div className="container">
           {modaleModel === "winner" && <Win />}
           {modaleModel === "start" && <Restart />}

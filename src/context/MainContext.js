@@ -36,6 +36,7 @@ const GameMainContext = ({ children }) => {
     setWinnerLine(null);
     setActiveUser("x");
     hideModal();
+    setIMoved(false);
     setScreen("start");
   };
 
@@ -77,8 +78,8 @@ const GameMainContext = ({ children }) => {
     socket.emit("move", {
       index,
       turn: myTurn,
-      roomId: currentRoomId,
       board: board,
+      roomId: currentRoomId,
     });
   };
 

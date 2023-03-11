@@ -287,6 +287,29 @@ body {
   gap: 15px;
 }
 
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100vw);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.zoom__in {
+  transform: scale(0);
+  animation: zoomIn 150ms 400ms ease-in-out forwards;
+}
+
 /* modal  */
 .modal {
   position: fixed;
@@ -302,6 +325,12 @@ body {
 .modal.closed {
   display: none;
 }
+
+.slide__right {
+  transform: translateX(-100vw);
+  animation: slideRight 250ms 100ms ease-in-out forwards;
+}
+
 .modal__content {
   width: 100%;
   background-color: var(--color-bg-light);

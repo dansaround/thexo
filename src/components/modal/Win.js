@@ -16,7 +16,6 @@ const Win = () => {
     <div className="score">
       {winner && winner !== "no" ? (
         <>
-          <p>yoy win!</p>
           <h3
             className={`score__title ${
               winner === "o" ? "text-yellow" : "text-blue"
@@ -31,7 +30,7 @@ const Win = () => {
         <h3 className="score__title text-yellow">No Winner !</h3>
       )}
       <div className="score__btns">
-        <button onClick={handlePlayAgain} className={`btn   btn-sm `}>
+        <button onClick={handlePlayAgain} className={`btn zoom__in btn-sm `}>
           Play again
         </button>
       </div>
