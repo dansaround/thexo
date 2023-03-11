@@ -9,6 +9,7 @@ import Xicon from "../icons/Xicon";
 import Oicon from "../icons/Oicon";
 import { useAuth } from "../../hooks/useAuth";
 import { useSessionValidation } from "../../hooks/useSessionValidation";
+import "animate.css";
 
 function Login() {
   const { handleGoogleSignup, isLoading } = useAuth();
@@ -17,7 +18,7 @@ function Login() {
 
   return (
     <div className="login">
-      <div className="icons">
+      <div className="icons animate__animated animate__fadeInUp">
         <Xicon />
         <Oicon />
       </div>

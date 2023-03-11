@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../../context/ModalContext";
 import { useNavigate } from "react-router-dom";
+import "animate.css";
 
 const Restart = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Restart = () => {
   };
 
   return (
-    <div className="restart">
+    <div className="restart animate__animated animate__slideInLeft">
       <h3 className="restart__title">Exit Game?</h3>
       <div className="restart__btns">
         <button className="btn btn-sm" onClick={handleExitGame}>

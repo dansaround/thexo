@@ -41,5 +41,10 @@ export const useAuth = () => {
     }
   };
 
-  return { handleGoogleSignup, isLoading };
+  const logout = () => {
+    auth.signOut();
+    navigate("/login");
+  };
+
+  return { handleGoogleSignup, isLoading, logout };
 };
