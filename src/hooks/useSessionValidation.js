@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../context/UserContext";
 
 export const useSessionValidation = ({ userIsLogged, userIsNotLogged }) => {
   const auth = getAuth();
+  const { handleSetUserData } = useContext(UserContext);
 
   const handleUserIsLogged = () => {
     userIsLogged && userIsLogged();
@@ -14,6 +17,7 @@ export const useSessionValidation = ({ userIsLogged, userIsNotLogged }) => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      user && handleSetUserData(user.uid, user.email);
       user && handleUserIsLogged();
       !user && handleUserIsNotLogged();
     });

@@ -7,15 +7,15 @@ import "./firebase.init";
 import { router } from "./router";
 import { GameState } from "./context/GameContex";
 import { ModalState } from "./context/ModalContext";
-import { GameMainContext } from "./context/MainContext";
+import { UserState } from "./context/UserContext";
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <ModalState>
-    <GameState>
-      <RouterProvider router={router} />
-    </GameState>
-  </ModalState>,
-  // </React.StrictMode>,
+  <UserState>
+    <ModalState>
+      <GameState>
+        <RouterProvider router={router} />
+      </GameState>
+    </ModalState>
+  </UserState>,
   document.getElementById("root")
 );

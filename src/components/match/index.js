@@ -6,7 +6,6 @@ import "./match.css";
 
 import Oicon from "../icons/Oicon";
 import Xicon from "../icons/Xicon";
-import ProfilePic from "../../assets/profile_pic.png";
 import { MainContext } from "../../context/MainContext";
 import { useSessionValidation } from "../../hooks/useSessionValidation";
 import { useNavigate } from "react-router-dom";
@@ -70,6 +69,7 @@ function Match() {
                 <div className="matchmaking__user__info animate__animated animate__fadeIn animate__delay-500ms">
                   <img
                     onClick={handleChangeAvatar}
+                    alt="user"
                     src={`https://avatars.dicebear.com/api/avataaars/${token}.svg`}
                   />
                   <h2>{usuario}</h2>

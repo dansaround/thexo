@@ -5,12 +5,14 @@ import { createContext, useState, useContext } from "react";
 import { ModalContext } from "./ModalContext";
 import { useSockets } from "../hooks/useSockets";
 import { useSocketIO } from "../hooks/useSocketIO";
+import { UserContext } from "./UserContext";
 
 const MainContext = createContext();
 
 const GameMainContext = ({ children }) => {
   const navigate = useNavigate();
   const { socket } = useSocketIO();
+  const { userUid } = useContext(UserContext);
   const { showModal, hideModal, setModalMode } = useContext(ModalContext);
 
   const [myTurn, setMyTurn] = useState("");
@@ -78,6 +80,7 @@ const GameMainContext = ({ children }) => {
     socket.emit("move", {
       index,
       turn: myTurn,
+      uid: userUid,
       board: board,
       roomId: currentRoomId,
     });
