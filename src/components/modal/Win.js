@@ -6,11 +6,13 @@ import Xicon from "../icons/Xicon";
 
 const Win = () => {
   const navigate = useNavigate();
-  const { winner } = useContext(MainContext);
+  const { winner, pointsEarned } = useContext(MainContext);
 
   const handlePlayAgain = () => {
     navigate("/match");
   };
+
+  console.log(pointsEarned);
 
   return (
     <div className="score">
@@ -29,6 +31,16 @@ const Win = () => {
       ) : (
         <h3 className="score__title text-yellow">No Winner !</h3>
       )}
+      <span
+        style={{
+          color: pointsEarned.includes("-")
+            ? "var(--color-red)"
+            : "var(--color-blue)",
+        }}
+        className="points-earned"
+      >
+        {pointsEarned}
+      </span>
       <div className="score__btns">
         <button onClick={handlePlayAgain} className={`btn  btn-sm `}>
           Play again

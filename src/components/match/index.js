@@ -11,24 +11,20 @@ import { useSessionValidation } from "../../hooks/useSessionValidation";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { v4 as uuidv4 } from "uuid";
+import { Spinner } from "../spinner";
+import { UserContext } from "../../context/UserContext";
 
 function Match() {
-  const navigate = useNavigate();
   const { logout } = useAuth();
-  useSessionValidation({ userIsNotLogged: () => navigate("/login") });
-  const { putPlayerInQueue, handleReset } = useContext(MainContext);
+  const navigate = useNavigate();
+  const { isLoading: isLoadingUser } = useSessionValidation({
+    userIsNotLogged: () => navigate("/login"),
+  });
+  const { user } = useContext(UserContext);
+  const { putPlayerInQueue, handleReset, getUid } = useContext(MainContext);
 
   const [isSearchingMatch, setIsSearchingMatch] = useState(false);
   const [token, setToken] = useState("abc123");
-
-  const data = [
-    {
-      usuario: "UserName",
-      nivelActual: 5,
-      experienciaActual: 4000,
-      experienciaSiguienteNivel: 5000,
-    },
-  ];
 
   useEffect(() => {
     handleReset();
@@ -47,6 +43,10 @@ function Match() {
     setToken(uuidv4());
   };
 
+  if (isLoadingUser) {
+    return <Spinner />;
+  }
+
   return (
     <div className="match">
       <div className="matchmaking__icons animate__animated animate__fadeInUp animate__fast">
@@ -55,41 +55,27 @@ function Match() {
       </div>
       <div className="match__container animate__animated animate__fadeInUp animate__fast ">
         <div>
-          {data.map(
-            ({
-              usuario,
-              nivelActual,
-              experienciaActual,
-              experienciaSiguienteNivel,
-            }) => {
-              const porcentaje =
-                (experienciaActual / experienciaSiguienteNivel) * 100;
+          <div className="matchmaking__user__info animate__animated animate__fadeIn animate__delay-500ms">
+            <img
+              onClick={handleChangeAvatar}
+              alt="user"
+              src={user.profilePic}
+            />
+            <h2 onClick={() => console.log(getUid())}>{user.nickname}</h2>
 
-              return (
-                <div className="matchmaking__user__info animate__animated animate__fadeIn animate__delay-500ms">
-                  <img
-                    onClick={handleChangeAvatar}
-                    alt="user"
-                    src={`https://avatars.dicebear.com/api/avataaars/${token}.svg`}
-                  />
-                  <h2>{usuario}</h2>
-
-                  <div className="level__bar ">
-                    <p className="level__current"> {nivelActual}</p>
-                    <div
-                      className="level__bar__completed"
-                      style={{
-                        width: `${porcentaje}%`,
-                      }}
-                    ></div>
-                    <p className="level__xp ">
-                      {experienciaActual} / {experienciaSiguienteNivel}
-                    </p>
-                  </div>
-                </div>
-              );
-            }
-          )}
+            <div className="level__bar ">
+              <p className="level__current"> {user.elo}</p>
+              <div
+                className="level__bar__completed"
+                style={{
+                  width: `${(user.points * 100) / 500}%`,
+                }}
+              ></div>
+              <p className="level__xp ">
+                {user.points} / {500}
+              </p>
+            </div>
+          </div>
           <p
             onClick={handleLogout}
             className="logout__text animate__animated animate__fadeIn animate__delay-1s"

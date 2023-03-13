@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/selectUser",
+    path: "/create-user",
     element: (
       <ContextWrapper>
         <SelectUser />

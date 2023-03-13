@@ -3,19 +3,22 @@ import { createContext, useState } from "react";
 const UserContext = createContext();
 
 const UserState = (props) => {
-  const [userUid, setUserUid] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+  const [user, setUser] = useState({
+    uid: "",
+    elo: 0,
+    email: "",
+    points: 0,
+    nickname: "",
+  });
 
-  const handleSetUserData = (uid, email) => {
-    setUserUid(uid);
-    setUserEmail(email);
+  const handleSetUserData = (userData) => {
+    setUser(userData);
   };
 
   return (
     <UserContext.Provider
       value={{
-        userUid,
-        userEmail,
+        user,
         handleSetUserData,
       }}
     >

@@ -10,7 +10,9 @@ import {
 } from "../sockets";
 
 export const useSockets = ({ socket, stateData }) => {
-  const { userUid } = useContext(UserContext);
+  const {
+    user: { uid },
+  } = useContext(UserContext);
 
   useEffect(() => {
     if (!socket) return;
@@ -24,7 +26,7 @@ export const useSockets = ({ socket, stateData }) => {
 
   const putPlayerInQueue = () => {
     const { socketId, elo } = stateData;
-    socket.emit("put-player-in-queue", { socketId, elo, uid: userUid });
+    socket.emit("put-player-in-queue", { socketId, elo, uid });
   };
 
   return {

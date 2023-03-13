@@ -1,18 +1,28 @@
 export const gameOverSocket = (socket, stateData) => {
-  const { setWinner, setWinnerLine, showModal, setModalMode } = stateData;
+  const {
+    getUid,
+    setWinner,
+    showModal,
+    setModalMode,
+    setWinnerLine,
+    handlePointsEarned,
+  } = stateData;
 
-  return socket.on("game-over", (moveResult) => {
-    if (moveResult === "draw") {
+  return socket.on("game-over", (gameResult) => {
+    const uid = getUid();
+    console.log(gameResult);
+    if (gameResult.winner === "draw") {
+      handlePointsEarned(gameResult.pointsEarned[uid] || "");
       setWinner("no");
       setModalMode("winner");
       showModal();
       return;
     }
 
-    console.log("GAME OVER ", moveResult);
-    setWinner(moveResult.winner);
-    setWinnerLine(moveResult.line);
-    showModal();
+    handlePointsEarned(gameResult.pointsEarned[uid] || "");
+    setWinner(gameResult.winner);
+    setWinnerLine(gameResult.line);
     setModalMode("winner");
+    showModal();
   });
 };

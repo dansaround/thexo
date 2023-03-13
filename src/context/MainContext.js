@@ -12,7 +12,9 @@ const MainContext = createContext();
 const GameMainContext = ({ children }) => {
   const navigate = useNavigate();
   const { socket } = useSocketIO();
-  const { userUid } = useContext(UserContext);
+  const {
+    user: { uid: userUid },
+  } = useContext(UserContext);
   const { showModal, hideModal, setModalMode } = useContext(ModalContext);
 
   const [myTurn, setMyTurn] = useState("");
@@ -23,6 +25,7 @@ const GameMainContext = ({ children }) => {
   const [activeUser, setActiveUser] = useState("x");
   const [winnerLine, setWinnerLine] = useState(null);
   const [currentTurn, setCurrentTurn] = useState("x");
+  const [pointsEarned, setPointsEarned] = useState("");
   const [currentRoomId, setCurrentRoomId] = useState("");
   const [board, setBoard] = useState(new Array(9).fill(""));
 
@@ -39,41 +42,9 @@ const GameMainContext = ({ children }) => {
     setActiveUser("x");
     hideModal();
     setIMoved(false);
+    setPointsEarned("");
     setScreen("start");
   };
-
-  const stateData = {
-    elo,
-    board,
-    socket,
-    myTurn,
-    iMoved,
-    screen,
-    winner,
-    setBoard,
-    socketId,
-    setWinner,
-    setMyTurn,
-    showModal,
-    hideModal,
-    setIMoved,
-    setScreen,
-    activeUser,
-    navigateTo,
-    winnerLine,
-    handleReset,
-    setSocketId,
-    currentTurn,
-    setModalMode,
-    setWinnerLine,
-    setActiveUser,
-    currentRoomId,
-    setCurrentTurn,
-    setCurrentRoomId,
-  };
-
-  const { emitters } = useSockets({ socket, stateData });
-  const { putPlayerInQueue } = emitters;
 
   const handlePlayerMove = (index) => {
     if (iMoved) return;
@@ -90,12 +61,57 @@ const GameMainContext = ({ children }) => {
     socket.emit("test-players-variable");
   };
 
+  const handlePointsEarned = (points) => {
+    setPointsEarned(points);
+  };
+
+  const getUid = () => {
+    return userUid;
+  };
+
+  const stateData = {
+    elo,
+    board,
+    socket,
+    myTurn,
+    iMoved,
+    screen,
+    winner,
+    getUid,
+    setBoard,
+    socketId,
+    setWinner,
+    setMyTurn,
+    showModal,
+    hideModal,
+    setIMoved,
+    setScreen,
+    testUsers,
+    activeUser,
+    navigateTo,
+    winnerLine,
+    handleReset,
+    setSocketId,
+    currentTurn,
+    setModalMode,
+    pointsEarned,
+    setWinnerLine,
+    setActiveUser,
+    currentRoomId,
+    setCurrentTurn,
+    handlePlayerMove,
+    setCurrentRoomId,
+
+    handlePointsEarned,
+  };
+
+  const { emitters } = useSockets({ socket, stateData });
+  const { putPlayerInQueue } = emitters;
+
   return (
     <MainContext.Provider
       value={{
         ...stateData,
-        handlePlayerMove,
-        testUsers,
         putPlayerInQueue,
       }}
     >

@@ -54,6 +54,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  overflow: hidden;
 }
 
 .avatar-text {
@@ -88,4 +89,44 @@
 
 .btn-avt-area {
   transform: scale(0.8);
+}
+
+.start-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.start-btn {
+  width: fit-content;
+  margin-top: 20px;
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-110%);
+  }
+}
+.slide-out {
+  animation: slideOut 250ms ease forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-110%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.slide-in {
+  animation: slideIn 250ms ease forwards;
 }
