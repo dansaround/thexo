@@ -21,7 +21,13 @@ function Match() {
     userIsNotLogged: () => navigate("/login"),
   });
   const { user } = useContext(UserContext);
-  const { putPlayerInQueue, handleReset, getUid } = useContext(MainContext);
+  const {
+    putPlayerInQueue,
+    removePlayerFromQueue,
+    handleReset,
+    getUid,
+    testUsers,
+  } = useContext(MainContext);
 
   const [isSearchingMatch, setIsSearchingMatch] = useState(false);
   const [token, setToken] = useState("abc123");
@@ -40,7 +46,12 @@ function Match() {
   };
 
   const handleChangeAvatar = () => {
-    setToken(uuidv4());
+    testUsers();
+  };
+
+  const handleExitQueue = () => {
+    setIsSearchingMatch(false);
+    removePlayerFromQueue();
   };
 
   if (isLoadingUser) {
@@ -93,16 +104,31 @@ function Match() {
           <button className="btn btn-yellow btn-join">Find match</button>
         </div>
       ) : (
-        <h2
+        <div
           style={{
-            marginTop: 40,
             width: "100%",
-            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          {" "}
-          Buscando rival{" "}
-        </h2>
+          <h2
+            style={{
+              marginTop: 40,
+              width: "100%",
+              textAlign: "center",
+            }}
+          >
+            Buscando rival
+          </h2>
+          <button
+            onClick={handleExitQueue}
+            style={{ marginTop: 20 }}
+            className="btn"
+          >
+            Exit queue
+          </button>
+        </div>
       )}
     </div>
   );

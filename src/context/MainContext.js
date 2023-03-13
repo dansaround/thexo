@@ -106,13 +106,14 @@ const GameMainContext = ({ children }) => {
   };
 
   const { emitters } = useSockets({ socket, stateData });
-  const { putPlayerInQueue } = emitters;
+  const { putPlayerInQueue, removePlayerFromQueue } = emitters;
 
   return (
     <MainContext.Provider
       value={{
         ...stateData,
         putPlayerInQueue,
+        removePlayerFromQueue,
       }}
     >
       {children}

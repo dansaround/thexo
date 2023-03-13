@@ -29,9 +29,15 @@ export const useSockets = ({ socket, stateData }) => {
     socket.emit("put-player-in-queue", { socketId, elo, uid });
   };
 
+  const removePlayerFromQueue = () => {
+    const { socketId, elo } = stateData;
+    socket.emit("remove-player-from-queue", { socketId, elo, uid });
+  };
+
   return {
     emitters: {
       putPlayerInQueue,
+      removePlayerFromQueue,
     },
   };
 };
