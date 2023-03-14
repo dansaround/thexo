@@ -10,7 +10,6 @@ export const gameOverSocket = (socket, stateData) => {
 
   return socket.on("game-over", (gameResult) => {
     const uid = getUid();
-    console.log(gameResult);
     if (gameResult.winner === "draw") {
       handlePointsEarned(gameResult.pointsEarned[uid] || "");
       setWinner("no");

@@ -46,10 +46,11 @@ const GameMainContext = ({ children }) => {
     setScreen("start");
   };
 
-  const handlePlayerMove = (index) => {
+  const handlePlayerMove = (action) => {
     if (iMoved) return;
+
     socket.emit("move", {
-      index,
+      index: action.value,
       turn: myTurn,
       uid: userUid,
       board: board,

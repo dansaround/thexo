@@ -1,15 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "../../context/MainContext";
 import { ModalContext } from "../../context/ModalContext";
 import Oicon from "../icons/Oicon";
 import Xicon from "../icons/Xicon";
 import BoardCard from "./BoardCard";
 import "animate.css";
+import { Counter } from "../counter";
 
 const Board = () => {
   const { showModal, setModalMode } = useContext(ModalContext);
   const { winnerLine, board, winner, handlePlayerMove, currentTurn, myTurn } =
     useContext(MainContext);
+
+  const [isStopped, setIsStopped] = useState(false);
+  const [showCounter, setShowCounter] = useState(true);
+
+  useEffect(() => {
+    if (winner && winner !== "") {
+      setIsStopped(true);
+    }
+  }, [winner]);
+
+  const isMyTurn = currentTurn === myTurn;
 
   const handleRestart = () => {
     showModal();
@@ -17,27 +29,54 @@ const Board = () => {
   };
 
   const handleMove = (index) => {
-    if (currentTurn !== myTurn) return;
-    handlePlayerMove(index);
+    if (!isMyTurn) return;
+    handlePlayerMove({ value: index });
   };
+
+  const handleTimeUp = () => {
+    handlePlayerMove({ value: -1 });
+  };
+
+  useEffect(() => {
+    setShowCounter(false);
+    setTimeout(() => setShowCounter(true));
+  }, [currentTurn]);
 
   return (
     <div className="board animate__animated animate__fadeIn slow ">
+      <h3>
+        {" "}
+        You're{" "}
+        <b className={`${myTurn === "x" ? "text-blue" : "text-yellow"}`}>
+          {myTurn}
+        </b>{" "}
+      </h3>
       <div className="board__header">
-        <div>
-          <Xicon />
-          <Oicon />
-        </div>
-        <div className="board__turn">
-          {currentTurn === "x" ? (
-            <Xicon color="light" size="sm" />
-          ) : (
-            <Oicon color="light" size="sm" />
+        <div className="timer__container">
+          {showCounter && (
+            <Counter
+              myTurn={myTurn}
+              turn={currentTurn}
+              stopped={isStopped}
+              timeUp={handleTimeUp}
+            />
           )}
-          {myTurn === currentTurn ? "Your turn" : "turn"}
         </div>
-        <div>
-          <button className="btn btn-sm board__restart" onClick={handleRestart}>
+        <div className="board__turn__container">
+          <div className="board__turn">
+            {currentTurn === "x" ? (
+              <Xicon color="light" size="sm" />
+            ) : (
+              <Oicon color="light" size="sm" />
+            )}
+            {myTurn === currentTurn ? "Your turn" : "turn"}
+          </div>
+        </div>
+        <div className="restart__container">
+          <button
+            className="btn btn-sm board__restart restart__btn"
+            onClick={handleRestart}
+          >
             <svg
               aria-hidden="true"
               focusable="false"

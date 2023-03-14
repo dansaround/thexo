@@ -8,19 +8,6 @@ import Xicon from "../icons/Xicon";
 const Start = () => {
   const { activeUser, setActiveUser } = useContext(MainContext);
 
-  // const handleEvent = () => {
-  //   socket.emit("test-players-variable");
-  // };
-
-  // const handleEvent2 = () => {
-  //   socket.emit("test-room-members");
-  // };
-
-  // const handleJoin = () => {
-  //   handleJoinTheRoom();
-  //   setHasJoined(true);
-  // };
-
   return (
     <div className="start">
       <div className="start__header">

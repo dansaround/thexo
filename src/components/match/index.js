@@ -13,6 +13,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { v4 as uuidv4 } from "uuid";
 import { Spinner } from "../spinner";
 import { UserContext } from "../../context/UserContext";
+import { Counter } from "../counter";
 
 function Match() {
   const { logout } = useAuth();
@@ -72,7 +73,7 @@ function Match() {
               alt="user"
               src={user.profilePic}
             />
-            <h2 onClick={() => console.log(getUid())}>{user.nickname}</h2>
+            <h2>{user.nickname}</h2>
 
             <div className="level__bar ">
               <p className="level__current"> {user.elo}</p>

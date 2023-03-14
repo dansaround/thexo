@@ -12,8 +12,6 @@ const Win = () => {
     navigate("/match");
   };
 
-  console.log(pointsEarned);
-
   return (
     <div className="score">
       {winner && winner !== "no" ? (
@@ -29,7 +27,7 @@ const Win = () => {
           </h3>
         </>
       ) : (
-        <h3 className="score__title text-yellow">No Winner !</h3>
+        <h3 className="score__title text-light">No Winner !</h3>
       )}
       <span
         style={{

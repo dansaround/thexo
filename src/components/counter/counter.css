@@ -1,0 +1,25 @@
+.counter-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 7fr 8fr;
+  width: 80%;
+  border-radius: 4px;
+  height: 100%;
+  padding: 6px 0;
+  place-items: center;
+}
+
+.main-content h2 {
+  font-size: 30px;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+  color: #192a33;
+  margin: 0;
+  /* text-shadow: -2px 2px 0 gray; */
+}
