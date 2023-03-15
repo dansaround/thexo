@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, useNavigate } from "react-router-dom";
 
 import App from "../App";
 import Login from "../components/login";
@@ -6,13 +6,16 @@ import Match from "../components/match";
 import SelectUser from "../components/SelectUser";
 import { GameMainContext } from "../context/MainContext";
 
-const ContextWrapper = ({ children }) => {
-  return <GameMainContext>{children}</GameMainContext>;
+const ContextWrapper = ({ children, redirect = "" }) => {
+  const navigate = useNavigate();
+  redirect && navigate(redirect);
+
+  return <GameMainContext>{!redirect && children}</GameMainContext>;
 };
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/play",
     element: (
       <ContextWrapper>
         <App />
@@ -40,6 +43,14 @@ export const router = createBrowserRouter([
     element: (
       <ContextWrapper>
         <SelectUser />
+      </ContextWrapper>
+    ),
+  },
+  {
+    path: "/",
+    element: (
+      <ContextWrapper redirect="/match">
+        <></>
       </ContextWrapper>
     ),
   },
