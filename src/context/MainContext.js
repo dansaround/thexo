@@ -12,9 +12,7 @@ const MainContext = createContext();
 const GameMainContext = ({ children }) => {
   const navigate = useNavigate();
   const { socket } = useSocketIO();
-  const {
-    user: { uid: userUid },
-  } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const { showModal, hideModal, setModalMode } = useContext(ModalContext);
 
   const [myTurn, setMyTurn] = useState("");
@@ -52,7 +50,7 @@ const GameMainContext = ({ children }) => {
     socket.emit("move", {
       index: action.value,
       turn: myTurn,
-      uid: userUid,
+      uid: user.uid || "",
       board: board,
       roomId: currentRoomId,
     });
@@ -67,7 +65,7 @@ const GameMainContext = ({ children }) => {
   };
 
   const getUid = () => {
-    return userUid;
+    return user.uid || "";
   };
 
   const stateData = {
