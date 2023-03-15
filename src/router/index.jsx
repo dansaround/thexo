@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createBrowserRouter, useNavigate } from "react-router-dom";
 
 import App from "../App";
@@ -8,7 +9,9 @@ import { GameMainContext } from "../context/MainContext";
 
 const ContextWrapper = ({ children, redirect = "" }) => {
   const navigate = useNavigate();
-  redirect && navigate(redirect);
+  useEffect(() => {
+    redirect && navigate(redirect); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [redirect]);
 
   return <GameMainContext>{!redirect && children}</GameMainContext>;
 };
