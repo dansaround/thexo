@@ -21,7 +21,7 @@ export const useSockets = ({ socket, stateData }) => {
     setIdSocket(socket, stateData);
     playerMovedSocket(socket, stateData);
     gameOverSocket(socket, stateData);
-    gameStartedSocket(socket, stateData, () => stateData.navigateTo("/"));
+    gameStartedSocket(socket, stateData, () => stateData.navigateTo("/play"));
   }, [socket, stateData]);
 
   const putPlayerInQueue = () => {
