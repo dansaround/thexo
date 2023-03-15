@@ -10,10 +10,8 @@ import { MainContext } from "../../context/MainContext";
 import { useSessionValidation } from "../../hooks/useSessionValidation";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { v4 as uuidv4 } from "uuid";
 import { Spinner } from "../spinner";
 import { UserContext } from "../../context/UserContext";
-import { Counter } from "../counter";
 
 function Match() {
   const { logout } = useAuth();
@@ -22,16 +20,10 @@ function Match() {
     userIsNotLogged: () => navigate("/login"),
   });
   const { user } = useContext(UserContext);
-  const {
-    putPlayerInQueue,
-    removePlayerFromQueue,
-    handleReset,
-    getUid,
-    testUsers,
-  } = useContext(MainContext);
+  const { putPlayerInQueue, removePlayerFromQueue, handleReset, testUsers } =
+    useContext(MainContext);
 
   const [isSearchingMatch, setIsSearchingMatch] = useState(false);
-  const [token, setToken] = useState("abc123");
 
   useEffect(() => {
     handleReset();

@@ -34,7 +34,7 @@ function SelectUser() {
       setUrl(user.profilePic);
       return;
     }
-    setUrl(`https://avatars.dicebear.com/api/avataaars/${user.uid}.svg`);
+    setUrl(`https://avatars.dicebear.com/api/avataaars/${uuidv4()}.svg`);
   }, [user]);
 
   const handleChangeAvatar = () => {
